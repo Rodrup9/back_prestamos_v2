@@ -10,7 +10,7 @@ export class Payment {
     @Column('numeric')
     amount: number;
 
-    @Column('date')
+    @Column('timestamp without time zone')
     payment_date: Date;
 
     @Column('boolean', {default: true})
