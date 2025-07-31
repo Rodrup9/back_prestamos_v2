@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseUUIDPipe } from '@nestjs/common';
 import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/decorators';
+import { User } from 'src/users/entities/user.entity';
 
 @Controller('loans')
 export class LoansController {
   constructor(private readonly loansService: LoansService) {}
 
   @Post()
-  create(@Body() createLoanDto: CreateLoanDto) {
-    return this.loansService.create(createLoanDto);
+  @UseGuards(AuthGuard())
+  create(@Body() createLoanDto: CreateLoanDto, @GetUser() user: User) {
+    return this.loansService.create(createLoanDto, user);
   }
 
   @Get()
+  @UseGuards(AuthGuard())
   findAll() {
     return this.loansService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.loansService.findOne(+id);
+  @UseGuards(AuthGuard())
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.loansService.findOneById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
-    return this.loansService.update(+id, updateLoanDto);
+  @UseGuards(AuthGuard())
+  update(@Param('id', ParseUUIDPipe) id: string, @Body() updateLoanDto: UpdateLoanDto) {
+    return this.loansService.update(id, updateLoanDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.loansService.remove(+id);
-  }
 }
