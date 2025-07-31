@@ -15,16 +15,16 @@ export class Loan {
     @Column('date')
     start_date: Date;
 
-    @Column('number')
+    @Column('numeric')
     payment_interval: number;
 
-    @Column('number')
+    @Column('numeric')
     minimum_payment: number;
     
     @Column('date')
     end_date: Date;
     
-    @Column('number')
+    @Column('numeric')
     interest_rate: number;
 
     @Column('boolean', {default: true})

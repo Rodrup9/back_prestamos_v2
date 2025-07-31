@@ -17,16 +17,21 @@ import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
+      ssl: process.env.STAGE === 'prod' ? true : false,
+      extra: {
+        ssl: process.env.STAGE === 'prod' ? { rejectUnauthorized: false } : null,
+      },
       type: 'postgres',
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT!,
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      synchronize: true
+      synchronize: true,
+      autoLoadEntities: true
     }),
-    ConfigModule.forRoot(),
     UsersModule,
     AuthModule,
     StatesModule,
@@ -42,4 +47,13 @@ import { SeedModule } from './seed/seed.module';
     SeedModule,
   ]
 })
+
 export class AppModule {}
+
+// console.log(process.env.DB_PASSWORD,
+//   process.env.DB_USER,
+//   process.env.DB_NAME,
+//   process.env.DB_HOST,
+//   process.env.DB_PORT,
+//   process.env.STAGE
+// )

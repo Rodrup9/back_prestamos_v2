@@ -9,26 +9,26 @@ export class SeedController {
 
   @Post()
   create(@Body() createSeedDto: CreateSeedDto) {
-    return this.seedService.create(createSeedDto);
+    return this.seedService.createUserDefault();
   }
 
-  @Get()
-  findAll() {
-    return this.seedService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.seedService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.seedService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.seedService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSeedDto: UpdateSeedDto) {
-    return this.seedService.update(+id, updateSeedDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateSeedDto: UpdateSeedDto) {
+  //   return this.seedService.update(+id, updateSeedDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.seedService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.seedService.remove(+id);
+  // }
 }

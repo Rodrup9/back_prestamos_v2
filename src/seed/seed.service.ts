@@ -22,7 +22,7 @@ export class SeedService {
       userCreated: '21ab81c5-8463-4298-a925-4344ca63d03e'
     });
 
-
+    await this.userRepository.save(user);
     return user;
   }
 
