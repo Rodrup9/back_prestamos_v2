@@ -105,4 +105,10 @@ export class LocalitiesService {
     throw new BadRequestException('Bad request');
   }
 
+  findByIdCity(id: string): Promise<Locality[]> {
+    return this.localityRepository.find({
+      where: { city: { idcity: id, status: true }, status: true}
+    })
+  }
+
 }

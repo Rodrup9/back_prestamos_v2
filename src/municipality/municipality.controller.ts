@@ -22,6 +22,12 @@ export class MunicipalityController {
     return {error: false, response: await this.municipalityService.findAll()};
   }
 
+  @Get('byState/:id')
+  @UseGuards(AuthGuard())
+  async findByIdState(@Param('id', ParseUUIDPipe) id: string) {
+    return {error: false, response: await this.municipalityService.findByIdState(id)};
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard())
   async findOne(@Param('id', ParseUUIDPipe) id: string) {

@@ -79,4 +79,10 @@ export class CitiesService {
     return 'City updated';
   }
 
+  findByIdMunicipality(id: string): Promise<City[]> {
+    return this.citiesRepository.find({
+      where: { municipality: { idmunicipality: id, status: true }, status: true}
+    })
+  }
+
 }

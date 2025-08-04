@@ -22,6 +22,12 @@ export class CitiesController {
     return {errpr: false, response: await this.citiesService.findAll()};
   }
 
+  @Get('byMunicipality/:id')
+  @UseGuards(AuthGuard())
+  async findByIdMunicipality(@Param('id') id: string) {
+    return {errpr: false, response: await this.citiesService.findByIdMunicipality(id)};
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard())
   async findOne(@Param('id') id: string) {

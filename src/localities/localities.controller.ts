@@ -22,6 +22,12 @@ export class LocalitiesController {
     return {error: false, response: await this.localitiesService.findAll()};
   }
 
+  @Get('byCity/:id')
+  @UseGuards(AuthGuard())
+  async findByIdCity(@Param('id') id: string) {
+    return {error: false, response: await this.localitiesService.findByIdCity(id)};
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard())
   async findOne(@Param('id') id: string) {
