@@ -4,13 +4,15 @@ import { MunicipalityController } from './municipality.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Municipality } from './entities/municipality.entity';
 import { StatesModule } from 'src/states/states.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   controllers: [MunicipalityController],
   providers: [MunicipalityService],
   imports: [
     TypeOrmModule.forFeature([Municipality]),
-    StatesModule
+    StatesModule,
+    AuthModule
   ],
   exports: [MunicipalityService]
 })
